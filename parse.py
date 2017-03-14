@@ -61,16 +61,23 @@ print att_going
 
 #Attendance if you miss today
 att_miss = ((attend)/(total+1))*100
+i=0
+for i in range(0,c-1):
+	if (ctype[i] == "Embedded Lab"):
+		att_miss[i] = ((attend[i])/(total[i]+2))*100
 att_miss = np.ceil(np.array(att_miss)).astype(int)
 print att_miss
 
+
 #How many classes you can miss
 no_miss = ((attend/0.75)-total)
-no_miss = np.floor(np.array(no_miss)).astype(int)
 i=0
 for i in range(0,c-1):
 	if (no_miss[i]<0):
 		no_miss[i]=0
+	if (ctype[i] == "Embedded Lab"):
+		no_miss[i] = ((attend[i]/0.75)-total[i])/2
+no_miss = np.floor(np.array(no_miss)).astype(int)
 
 print no_miss
 
