@@ -34,16 +34,23 @@ mydriver.maximize_window()
 mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
 
 
-#taking screenshot to save the captcha
-mydriver.save_screenshot("screenshot.png")
-img = cv2.imread("screenshot.png")
-crop_img = img[280:320, 650:800] # Crop from x, y, w, h -> 100, 200, 300, 400
-# NOTE: its img[y: y + h, x: x + w] and *not* img[x: x + w, y: y + h]
-#cv2.imshow("cropped", crop_img)
-#cv2.waitKey(0)
-cv2.imwrite('captcha.png',crop_img)
-gray_image = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
-cv2.imwrite('gray_captcha.png',gray_image)
+# now that we have the preliminary stuff out of the way time to get that image :D
+element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
+location = element.location
+size = element.size
+mydriver.save_screenshot('screenshot.png') # save screenshot of entire page
+mydriver.quit()
+
+im = Image.open('screenshot.png') # uses PIL library to open image in memory
+
+left = location['x']
+top = location['y']
+right = location['x'] + size['width']
+bottom = location['y'] + size['height']
+
+
+im = im.crop((left, top, right, bottom)) # define crop points
+im.save('screenshot.png') # save new cropped image
 
 
 #Clear Username TextBox if already allowed "Remember Me" 

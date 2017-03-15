@@ -1,0 +1,38 @@
+1489595667510	geckodriver	INFO	Listening on 127.0.0.1:52441
+1489595668363	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.vwEMldKZ13LN
+1489595668364	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1489595668367	geckodriver::marionette	INFO	Connecting to Marionette on localhost:46773
+1489595669290	Marionette	INFO	Listening on port 46773
+1489595671709	Marionette	INFO	startBrowser 24fe0177-61a2-457d-a9f1-d18480447f16
+1489595702256	geckodriver	INFO	Listening on 127.0.0.1:49515
+1489595703306	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.70Mr1BXj3rDM
+1489595703307	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1489595703310	geckodriver::marionette	INFO	Connecting to Marionette on localhost:36921
+1489595704189	Marionette	INFO	Listening on port 36921
+1489595706479	Marionette	INFO	startBrowser 647b13dd-006b-4a66-b87b-9a850fce204a
+1489596492133	geckodriver	INFO	Listening on 127.0.0.1:33501
+1489596493193	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.rEJu2vuqxmcT
+1489596493194	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1489596493196	geckodriver::marionette	INFO	Connecting to Marionette on localhost:37227
+1489596494046	Marionette	INFO	Listening on port 37227
+1489596496386	Marionette	INFO	startBrowser 29beb4e1-8803-4b15-bc14-23cd589537cb
+1489596645585	geckodriver	INFO	Listening on 127.0.0.1:43093
+1489596646642	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.FpOFIBbuYUoP
+1489596646643	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1489596646646	geckodriver::marionette	INFO	Connecting to Marionette on localhost:43869
+1489596647559	Marionette	INFO	Listening on port 43869
+1489596649873	Marionette	INFO	startBrowser a7d913c1-53ba-4979-bf68-1df5571f7449
+[Child 5856] ###!!! ABORT: Aborting on channel error.: file /build/firefox-QofjYJ/firefox-49.0.2+build2/ipc/glue/MessageChannel.cpp, line 2052
+
+###!!! [Child][MessageChannel] Error: (msgtype=0xFA0005,name=PTexture::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0xFA0005,name=PTexture::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x400003,name=PCompositable::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x400003,name=PCompositable::Msg_Destroy) Channel error: cannot send/recv
+
+[Child 5856] ###!!! ABORT: Aborting on channel error.: file /build/firefox-QofjYJ/firefox-49.0.2+build2/ipc/glue/MessageChannel.cpp, line 2052
