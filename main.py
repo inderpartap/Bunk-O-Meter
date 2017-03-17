@@ -2,12 +2,15 @@ import time
 import os
 import datetime
 import codecs
-import cv2
+#import cv2
+#from PIL import Image
 
 import urllib2
 from bs4 import BeautifulSoup
 import requests
 
+#sudo apt-get install xvfb and pip install pyvirtualdisplay to run it in background
+from pyvirtualdisplay import Display
 from selenium import webdriver
 
 from selenium.webdriver.common.by import By
@@ -15,6 +18,9 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+
+display = Display(visible=0, size=(800, 600))
+display.start()
 
 baseurl = "http://academicscc.vit.ac.in/student/stud_login.asp"
 regno = raw_input("Registration Number: ")
@@ -35,22 +41,22 @@ mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "
 
 
 # now that we have the preliminary stuff out of the way time to get that image :D
-element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
-location = element.location
-size = element.size
-mydriver.save_screenshot('screenshot.png') # save screenshot of entire page
-mydriver.quit()
-
-im = Image.open('screenshot.png') # uses PIL library to open image in memory
-
-left = location['x']
-top = location['y']
-right = location['x'] + size['width']
-bottom = location['y'] + size['height']
+#element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
+#location = element.location
+#size = element.size
+#mydriver.save_screenshot('screenshot.jpg') # save screenshot of entire page
 
 
-im = im.crop((left, top, right, bottom)) # define crop points
-im.save('screenshot.png') # save new cropped image
+#im = Image.open('screenshot.jpg') # uses PIL library to open image in memory
+
+#left = location['x']
+#top = location['y']
+#right = location['x'] + size['width']
+#bottom = location['y'] + size['height']
+
+
+#im = im.crop((left, top, right, bottom)) # define crop points
+#im.save('screenshot.jpg') # save new cropped image
 
 
 #Clear Username TextBox if already allowed "Remember Me" 
@@ -65,14 +71,17 @@ mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).clear()
 #Write Password in password TextBox
 mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).send_keys(passwd)
 
+#autofill captcha
+mydriver.execute_script(open("./captcha.js").read())
+
 #Get Captcha from the user
-vrfcd = raw_input("Please enter the captcha: ")
+#vrfcd = raw_input("Please enter the captcha: ")
 
 #Clear Captcha TextBox if already allowed "Remember Me" 
-mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).clear()
+#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).clear()
 
 #Write Captcha in captcha TextBox
-mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).send_keys(vrfcd)
+#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).send_keys(vrfcd)
 
 #Click Login button
 mydriver.find_element_by_xpath(xpaths['submitButton']).click()
@@ -86,7 +95,10 @@ mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't')
 mydriver.get(attendanceurl)
 html_source = mydriver.page_source
 
-text_file = codecs.open("attendance.html", "w", 'utf-8')
+filename=regno+".html"
+text_file = codecs.open(filename, "w", 'utf-8')
 text_file.write(html_source)
 text_file.close()
 
+mydriver.quit()
+display.stop()
