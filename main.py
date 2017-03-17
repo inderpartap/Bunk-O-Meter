@@ -1,3 +1,5 @@
+import parse
+
 import time
 import os
 import datetime
@@ -99,6 +101,8 @@ filename=regno+".html"
 text_file = codecs.open(filename, "w", 'utf-8')
 text_file.write(html_source)
 text_file.close()
+
+parse.parseatt(filename)
 
 mydriver.quit()
 display.stop()
