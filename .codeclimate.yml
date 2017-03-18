@@ -6,8 +6,10 @@ engines:
       languages:
         javascript:
         python:
+  eslint:
+    enabled: true
   fixme:
-    enabled: false
+    enabled: true
     config:
       strings:
       - FIXME
