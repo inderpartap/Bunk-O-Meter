@@ -1,0 +1,19 @@
+
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+	python:
+        javascript:
+          mass_threshold: 180
+  fixme:
+    enabled: false
+    config:
+      strings:
+      - FIXME
+      - BUG
+ratings:
+   paths:
+   - "**.js"
+   - "**.py"
