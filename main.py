@@ -6,6 +6,7 @@ import datetime
 import codecs
 #import cv2
 #from PIL import Image
+import getpass
 
 import urllib2
 from bs4 import BeautifulSoup
@@ -26,7 +27,7 @@ display.start()
 
 baseurl = "http://academicscc.vit.ac.in/student/stud_login.asp"
 regno = raw_input("Registration Number: ")
-passwd = raw_input("Password: ")
+passwd = getpass.getpass('Password:')
 
 
 xpaths = { 'usernameTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[2]/td[2]/input[@name='regno']",
