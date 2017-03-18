@@ -6,6 +6,7 @@ engines:
       languages:
       - ruby
       - javascript
+	 mass_threshold: 200
       - python
       - php
   eslint:
