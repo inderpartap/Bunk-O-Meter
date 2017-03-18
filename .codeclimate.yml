@@ -1,0 +1,19 @@
+
+engines:
+  duplication:
+    enabled: false
+    config:
+      languages:
+        javascript:
+        python:
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+    
+ratings:
+   paths:
+   - "**.js"
+   - "**.py"
