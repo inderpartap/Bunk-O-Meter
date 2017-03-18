@@ -4,9 +4,9 @@ engines:
     enabled: true
     config:
       languages:
-	python:
         javascript:
           mass_threshold: 180
+	python
   fixme:
     enabled: false
     config:
