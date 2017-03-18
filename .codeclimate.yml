@@ -4,8 +4,51 @@ engines:
     enabled: true
     config:
       languages:
-      - javascript:
+      - ruby
+      - javascript
+      - python
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths: []
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
 		mass_threshold: 180
-      - python:
+      - python
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths: []
 
-enabled: true
