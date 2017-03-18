@@ -1,0 +1,9 @@
+diff --git a/.eslintrc.yml b/.eslintrc.yml
+index 0e3f05c..a6a0ce9 100644
+--- a/.eslintrc.yml
++++ b/.eslintrc.yml
+@@ -275,4 +275,3 @@ rules:
+   symbol-description: off
+   template-curly-spacing: off
+   yield-star-spacing: off
+-
