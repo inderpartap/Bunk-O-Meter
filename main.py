@@ -4,8 +4,6 @@ import time
 import os
 import datetime
 import codecs
-#import cv2
-#from PIL import Image
 import getpass
 
 import urllib2
@@ -22,88 +20,89 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
-display = Display(visible=0, size=(800, 600))
-display.start()
+def attendance(username,password):
+	display = Display(visible=0, size=(800, 600))
+	display.start()
 
-baseurl = "http://academicscc.vit.ac.in/student/stud_login.asp"
-regno = raw_input("Registration Number: ")
-passwd = getpass.getpass('Password:')
-
-
-xpaths = { 'usernameTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[2]/td[2]/input[@name='regno']",
-           'passwordTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[3]/td[2]/input[@name='passwd']",
-           'captchaTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[5]/td/input[@name='vrfcd']",
-	   'submitButton' :   "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[6]/td/input[1]"
-         }
-
-mydriver = webdriver.Firefox()
-test = mydriver.get(baseurl)
-mydriver.maximize_window()
-
-mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
+	baseurl = "http://academicscc.vit.ac.in/student/stud_login.asp"
+	regno = username
+	passwd = password
 
 
-# now that we have the preliminary stuff out of the way time to get that image :D
-#element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
-#location = element.location
-#size = element.size
-#mydriver.save_screenshot('screenshot.jpg') # save screenshot of entire page
+	xpaths = { 'usernameTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[2]/td[2]/input[@name='regno']",
+	           'passwordTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[3]/td[2]/input[@name='passwd']",
+	           'captchaTxtBox' : "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[5]/td/input[@name='vrfcd']",
+		   'submitButton' :   "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[6]/td/input[1]"
+	         }
+
+	mydriver = webdriver.Firefox()
+	test = mydriver.get(baseurl)
+	mydriver.maximize_window()
+
+	mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
 
 
-#im = Image.open('screenshot.jpg') # uses PIL library to open image in memory
-
-#left = location['x']
-#top = location['y']
-#right = location['x'] + size['width']
-#bottom = location['y'] + size['height']
-
-
-#im = im.crop((left, top, right, bottom)) # define crop points
-#im.save('screenshot.jpg') # save new cropped image
+	# now that we have the preliminary stuff out of the way time to get that image :D
+	#element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
+	#location = element.location
+	#size = element.size
+	#mydriver.save_screenshot('screenshot.jpg') # save screenshot of entire page
 
 
-#Clear Username TextBox if already allowed "Remember Me" 
-mydriver.find_element_by_xpath(xpaths['usernameTxtBox']).clear()
+	#im = Image.open('screenshot.jpg') # uses PIL library to open image in memory
 
-#Write Username in Username TextBox
-mydriver.find_element_by_xpath(xpaths['usernameTxtBox']).send_keys(regno)
+	#left = location['x']
+	#top = location['y']
+	#right = location['x'] + size['width']
+	#bottom = location['y'] + size['height']
 
-#Clear Password TextBox if already allowed "Remember Me" 
-mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).clear()
 
-#Write Password in password TextBox
-mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).send_keys(passwd)
+	#im = im.crop((left, top, right, bottom)) # define crop points
+	#im.save('screenshot.jpg') # save new cropped image
 
-#autofill captcha
-mydriver.execute_script(open("./captcha.js").read())
 
-#Get Captcha from the user
-#vrfcd = raw_input("Please enter the captcha: ")
+	#Clear Username TextBox if already allowed "Remember Me" 
+	mydriver.find_element_by_xpath(xpaths['usernameTxtBox']).clear()
 
-#Clear Captcha TextBox if already allowed "Remember Me" 
-#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).clear()
+	#Write Username in Username TextBox
+	mydriver.find_element_by_xpath(xpaths['usernameTxtBox']).send_keys(regno)
 
-#Write Captcha in captcha TextBox
-#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).send_keys(vrfcd)
+	#Clear Password TextBox if already allowed "Remember Me" 
+	mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).clear()
 
-#Click Login button
-mydriver.find_element_by_xpath(xpaths['submitButton']).click()
+	#Write Password in password TextBox
+	mydriver.find_element_by_xpath(xpaths['passwordTxtBox']).send_keys(passwd)
 
-time.sleep(1)
+	#autofill captcha
+	mydriver.execute_script(open("./captcha.js").read())
 
-fromdate = "01-Jan-2017"
-todate = datetime.date.today().strftime ("%d-%b-%Y")
-attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem=WS&fmdt="+fromdate+"&todt="+todate
-mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
-mydriver.get(attendanceurl)
-html_source = mydriver.page_source
+	#Get Captcha from the user
+	#vrfcd = raw_input("Please enter the captcha: ")
 
-filename=regno+".html"
-text_file = codecs.open(filename, "w", 'utf-8')
-text_file.write(html_source)
-text_file.close()
+	#Clear Captcha TextBox if already allowed "Remember Me" 
+	#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).clear()
 
-parse.parseatt(filename)
+	#Write Captcha in captcha TextBox
+	#mydriver.find_element_by_xpath(xpaths['captchaTxtBox']).send_keys(vrfcd)
 
-mydriver.quit()
-display.stop()
+	#Click Login button
+	mydriver.find_element_by_xpath(xpaths['submitButton']).click()
+
+	time.sleep(3)
+
+	fromdate = "01-Jan-2017"
+	todate = datetime.date.today().strftime ("%d-%b-%Y")
+	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem=WS&fmdt="+fromdate+"&todt="+todate
+	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
+	mydriver.get(attendanceurl)
+	html_source = mydriver.page_source
+
+	filename=regno+".html"
+	text_file = codecs.open(filename, "w", 'utf-8')
+	text_file.write(html_source)
+	text_file.close()
+	result =[[] for i in xrange(8)]
+	result = parse.parseatt(filename)
+	mydriver.quit()
+	display.stop()
+	return result

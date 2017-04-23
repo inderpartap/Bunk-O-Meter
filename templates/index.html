@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bunk-O-Meter</title>
+
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Sign In</a>
+                    </li>
+                    <li role="presentation"><a href="showSignUp">Sign Up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div> -->
+
+        <div class="jumbotron">
+            <h1>Bunk-O-Meter</h1>
+            <p class="lead"></p>
+        </div>
+
+        <form method="POST" action="/" class="row">
+            {{form.csrf}}
+            <div class="col-lg-4">
+                <label for="Reg_No">Registration Number</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" name="Reg_No" id="reg_no" value="14bce1135">
+            </div>
+            <br><br>
+            <div class="col-lg-4">
+                <label for="Password">Password</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="password" name="Password" id="PassWd" value="Raghav@2508">
+            </div>
+            <br/>
+            <button class="btn-default " type="submit" value="Submit">Submit</button>
+        </form>        
+        <br>
+        <footer class="footer" align="center">
+            <p>Bunk-O-Meter</p>
+        </footer>
+
+    </div>
+</body>
+
+</html>

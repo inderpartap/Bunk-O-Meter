@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<title>Bunk-O-Meter</title>
+
+
+		<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Bunk-O-Meter</h1>
+			<p class="lead"></p>
+		</div>
+		<div>
+			<table>
+				<tr>
+					{% for info in results[0] %}
+					<th> {{ info }} </th>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[1] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[2] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[3] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[4] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[5] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[6] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for info in results[7] %}
+					<td> {{ info }} </td>
+					{% endfor %}
+				</tr>
+
+			</table>
+			<!-- {% for info in results %}
+			test_array[{{ loop.index0 }}] = "{{ info[2] }}";
+			{% endfor %} -->
+		</div>
+		<footer class="footer" align="center">
+				<p>Bunk-O-Meter</p>
+		</footer>
+	</div>
+</body>
+
+</html>
