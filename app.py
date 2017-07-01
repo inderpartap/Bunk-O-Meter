@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired
 from main import attendance
 from jinja2 import Template
 
+
 # App config.
 DEBUG = True
 app = Flask(__name__)

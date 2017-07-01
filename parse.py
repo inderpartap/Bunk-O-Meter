@@ -12,7 +12,6 @@ def parseatt(user):
 	soup =  BeautifulSoup(page, "html.parser")
 	page.close()
 	#print(soup.prettify())
-
 	#print soup('table')[4].prettify() 
 	c=0
 	for row in soup('table')[4].findAll('tr'):

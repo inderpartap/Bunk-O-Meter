@@ -1,11 +1,10 @@
 import parse
-
 import time
 import os
 import datetime
 import codecs
 import getpass
-
+import json
 import urllib2
 from bs4 import BeautifulSoup
 import requests
@@ -105,4 +104,8 @@ def attendance(username,password):
 	result = parse.parseatt(filename)
 	mydriver.quit()
 	display.stop()
+
+	json_filename = regno + ".json"
+	with open(json_filename, "w") as outfile:
+	    json.dump({'Course_Code':result[0], 'Course_Name':result[1], 'Course_Type':result[2], 'Attendace':result[3].tolist(),'Attendance_Going':result[4].tolist(),'Attendance_Miss':result[5].tolist(),'No_Miss':result[6].tolist(),'No_Bar':result[7].tolist()}, outfile, indent=4)
 	return result
