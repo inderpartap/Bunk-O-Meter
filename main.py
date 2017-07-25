@@ -36,8 +36,8 @@ def attendance(username,password):
 
 	mydriver = webdriver.Firefox()
 	test = mydriver.get(baseurl)
-	mydriver.maximize_window()
-
+	#mydriver.maximize_window() this stopped working, dont know why. will check this later
+	
 	mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
 
 
@@ -91,7 +91,7 @@ def attendance(username,password):
 
 	fromdate = "01-Jan-2017"
 	todate = datetime.date.today().strftime ("%d-%b-%Y")
-	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem=WS&fmdt="+fromdate+"&todt="+todate
+	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt="+fromdate+"&todt="+todate
 	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
 	mydriver.get(attendanceurl)
 	html_source = mydriver.page_source

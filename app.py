@@ -40,4 +40,4 @@ def index():
 # 	return render_template('result.html', results = arg)
 
 if __name__ == "__main__":
-	app.run(port=8082)
+	app.run(port=8083)

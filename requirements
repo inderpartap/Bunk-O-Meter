@@ -1,0 +1,13 @@
+geckodriver
+selenium
+pip
+python
+flask
+bs4
+
+
+wtforms
+xvfb -> pyvirtualdisplay
+requests
+numpy
+xserver-xephyr
