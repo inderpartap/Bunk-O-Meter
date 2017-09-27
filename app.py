@@ -20,7 +20,7 @@ class LoginForm(Form):
 @app.route("/",methods=['GET', 'POST'])
 def index():
 	form = LoginForm(request.form)
-	print form.errors
+	# print form.errors
 	if request.method == 'POST':
 		username=request.form['Reg_No']
 		password=request.form['Password']
