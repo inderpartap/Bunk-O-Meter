@@ -16,6 +16,13 @@ final =[[] for i in xrange(8)]
 class LoginForm(Form):
 		Reg_No = TextField('Name:', validators=[validators.required()])
 		Password = TextField('Password:', validators=[validators.required(), validators.Length(min=3, max=35)])
+
+app.config['CACHE_TYPE'] = 'simple'
+app.cache = Cache(app)
+
+# for debugging purposes
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
  
 @app.route("/",methods=['GET', 'POST'])
 def index():
@@ -45,4 +52,4 @@ def index():
 # 	return render_template('result.html', results = arg)
 
 if __name__ == "__main__":
-	app.run(port=8085)
+	app.run()
