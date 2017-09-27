@@ -3,6 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from wtforms.validators import DataRequired
 from main import attendance
 from jinja2 import Template
+import numpy as np
 
 
 # App config.
@@ -28,11 +29,15 @@ def index():
 			# Save the comment here.
 			flash('Complete')
 			final = attendance(username,password)
-			return render_template('result.html', results = final)
+			finals=np.asarray(final)
+			finals=finals.T
+			leng=len(final[0])
+			return render_template('dashboard.html', resultsT = finals, results = final, regno=username, length=leng)
 			# return redirect(url_for('atten', arg = final))
 		else:
 			flash('Error: All the form fields are required. ')
-	
+		
+    
 	return render_template('index.html', form=form)
 
 # @app.route("/att/<arg>")
@@ -40,4 +45,4 @@ def index():
 # 	return render_template('result.html', results = arg)
 
 if __name__ == "__main__":
-	app.run(port=8083)
+	app.run(port=8085)

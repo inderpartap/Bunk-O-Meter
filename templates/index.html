@@ -1,62 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>Bunk-O-Meter</title>
-
-
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-
-
+    <meta charset="UTF-8">
+    <title>Zcheduler Login</title>
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <!-- Bootstrap core CSS -->
+    <link href= "{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- style CSS -->
+    <link href= "{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
+    <div class="row">
 
-    <div class="container">
-        <!-- <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a>
-                    </li>
-                    <li role="presentation"><a href="#">Sign In</a>
-                    </li>
-                    <li role="presentation"><a href="showSignUp">Sign Up</a>
-                    </li>
-                </ul>
-            </nav>
-        </div> -->
-
-        <div class="jumbotron">
-            <h1>Bunk-O-Meter</h1>
-            <p class="lead"></p>
+        <div class="col-lg-6 col-md-6 col-sm-12 left full">
+        <div class="center"><h1> FFCS Scheduler</h1>
+        <h3>Your personal assistant monitoring your Classes. </h3>
+        <h5><b>Browser Requirements:</b>To use this application, we recommend using Chrome, Firefox or Safari </h5></div>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 full">
+            <div class="panda">
+                <div class="ear"></div>
+                <div class="face">
+                    <div class="eye-shade"></div>
+                    <div class="eye-white">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="eye-shade rgt"></div>
+                    <div class="eye-white rgt">
+                        <div class="eye-ball"></div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"> </div>
+                <div class="foot">
+                    <div class="finger"></div>
+                </div>
+                <div class="foot rgt">
+                    <div class="finger"></div>
+                </div>
+            </div>
+            <form method="POST" action="/" >
+             {{form.csrf}}
+                <div class="hand"></div>
+                <div class="hand rgt"></div>
+                <h1>FFCS Login</h1>
+                <div class="form-group">
+                    <input required="required" class="form-control" name="Reg_No" id="reg_no" />
+                    <label class="form-label" for="Reg_No">Username </label>
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" required="required" class="form-control" name="Password" id="PassWd" />
+                    <label class="form-label" for="Password">Password</label>
+                    <!-- <p class="alert">Invalid Credentials..!!</p> -->
+                    <button class="btn" type="submit" value="Submit">Login </button>
+                </div>
 
-        <form method="POST" action="/" class="row">
-            {{form.csrf}}
-            <div class="col-lg-4">
-                <label for="Reg_No">Registration Number</label>
-            </div>
-            <div class="col-lg-8">
-                <input type="text" name="Reg_No" id="reg_no" >
-            </div>
-            <br><br>
-            <div class="col-lg-4">
-                <label for="Password">Password</label>
-            </div>
-            <div class="col-lg-8">
-                <input type="password" name="Password" id="PassWd" >
-            </div>
-            <br/>
-            <button class="btn-default " type="submit" value="Submit">Submit</button>
-        </form>        
-        <br>
-        <footer class="footer" align="center">
-            <p>Bunk-O-Meter</p>
-        </footer>
-
+            </form>
+        </div>
     </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="{{ url_for('static',filename='js/index.js') }}"></script>
 </body>
 
 </html>

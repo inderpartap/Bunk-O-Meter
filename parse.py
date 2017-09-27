@@ -58,6 +58,9 @@ def parseatt(user):
 	#Calculating Attendance
 	attendance= (attend/total)*100
 	attendance = np.ceil(np.array(attendance)).astype(int)
+	for i in range(0,c-1):
+		if (attendance[i] < 0):
+			attendance[i]=0
 	result[3] = attendance
 	# print attendance
 

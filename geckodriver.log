@@ -1,0 +1,8 @@
+1501250382005	geckodriver	INFO	geckodriver 0.18.0
+1501250382045	geckodriver	INFO	Listening on 127.0.0.1:38121
+1501250383064	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1501250386719	Marionette	INFO	Listening on port 42303
+1501250386839	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://academicscc.vit.ac.in/student/stud_home.asp, line 71: TypeError: document.all.tags is not a function
+JavaScript error: https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt=01-Jan-2017&todt=28-Jul-2017, line 50: TypeError: document.all.tags is not a function
+1501250395399	Marionette	INFO	New connections will no longer be accepted
