@@ -5,7 +5,7 @@ import datetime
 import codecs
 import getpass
 import json
-import urllib2
+# import urllib2
 from bs4 import BeautifulSoup
 import requests
 

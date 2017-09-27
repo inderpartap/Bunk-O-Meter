@@ -1,4 +1,4 @@
-import urllib2
+# import urllib2
 from bs4 import BeautifulSoup
 import requests
 from array import *
