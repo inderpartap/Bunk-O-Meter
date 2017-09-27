@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath zcheduler app:app
+web: gunicorn app:app
