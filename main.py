@@ -34,7 +34,7 @@ def attendance(username,password):
 		   'submitButton' :   "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[6]/td/input[1]"
 	         }
 
-	mydriver = webdriver.Firefox()
+	mydriver = webdriver.Firefox(app/vendor/mruby_bin)
 	test = mydriver.get(baseurl)
 	#mydriver.maximize_window() this stopped working, dont know why. will check this later
 	
