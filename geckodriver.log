@@ -1,0 +1,24 @@
+1506582098566	geckodriver	INFO	geckodriver 0.18.0
+1506582098605	geckodriver	INFO	Listening on 127.0.0.1:42857
+1506582099800	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1506582104184	Marionette	INFO	Listening on port 46093
+1506582104242	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://academicscc.vit.ac.in/student/stud_home.asp, line 71: TypeError: document.all.tags is not a function
+JavaScript error: https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt=01-Jan-2017&todt=28-Sep-2017, line 50: TypeError: document.all.tags is not a function
+1506582114201	Marionette	INFO	New connections will no longer be accepted
+1506582209609	geckodriver	INFO	geckodriver 0.18.0
+1506582209612	geckodriver	INFO	Listening on 127.0.0.1:42343
+1506582210727	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1506582214683	Marionette	INFO	Listening on port 43759
+1506582214813	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://academicscc.vit.ac.in/student/stud_home.asp, line 71: TypeError: document.all.tags is not a function
+JavaScript error: https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt=01-Jan-2017&todt=28-Sep-2017, line 50: TypeError: document.all.tags is not a function
+1506582223191	Marionette	INFO	New connections will no longer be accepted
+1506582463779	geckodriver	INFO	geckodriver 0.18.0
+1506582463782	geckodriver	INFO	Listening on 127.0.0.1:54469
+1506582464902	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1506582468568	Marionette	INFO	Listening on port 42489
+1506582468705	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://academicscc.vit.ac.in/student/stud_home.asp, line 71: TypeError: document.all.tags is not a function
+JavaScript error: https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt=01-Jan-2017&todt=28-Sep-2017, line 50: TypeError: document.all.tags is not a function
+1506582477268	Marionette	INFO	New connections will no longer be accepted

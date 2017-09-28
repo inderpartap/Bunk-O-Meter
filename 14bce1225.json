@@ -1,0 +1,58 @@
+{
+    "Course_Type": [
+        "Theory Only", 
+        "Theory Only", 
+        "Theory Only", 
+        "Theory Only", 
+        "Theory Only"
+    ], 
+    "Attendance_Going": [
+        88, 
+        86, 
+        91, 
+        80, 
+        94
+    ], 
+    "Course_Name": [
+        "Programming Language Translators", 
+        "Software Project Management", 
+        "Human Computer Interaction", 
+        "Mobile Computing", 
+        "Principles of Management"
+    ], 
+    "No_Bar": [
+        0, 
+        0, 
+        0, 
+        0, 
+        0
+    ], 
+    "Course_Code": [
+        "CSE309", 
+        "CSE328", 
+        "CSE403", 
+        "CSE419", 
+        "MGT201"
+    ], 
+    "Attendance_Miss": [
+        85, 
+        83, 
+        88, 
+        77, 
+        90
+    ], 
+    "Attendace": [
+        87, 
+        86, 
+        90, 
+        80, 
+        93
+    ], 
+    "No_Miss": [
+        6, 
+        3, 
+        6, 
+        1, 
+        6
+    ]
+}

@@ -266,7 +266,10 @@ form {
   z-index: 500;
   border: 1px solid #eee;
 }
-
+form.up {
+  -webkit-transform: translateY(-180px);
+  transform: translateY(-180px);
+}
 
 h1 {
   color: #F25D59;
