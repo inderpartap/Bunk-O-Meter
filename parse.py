@@ -18,7 +18,7 @@ def parseatt(user):
 	    tds = row('td')
 	    c = c+1
 
-	result =[[] for i in xrange(8)]
+	result =[[] for i in range(8)]
 
 	#Course Code
 	i=1
