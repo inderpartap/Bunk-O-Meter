@@ -6,8 +6,16 @@ engines:
       languages:
         javascript:
         python:
+  # ... CONFIG CONTENT ...
   eslint:
     enabled: true
+    # ... CONFIG CONTENT ...
+    checks:
+      max-statements:
+        enabled: false
+      complexity:
+        enabled: false
+
   fixme:
     enabled: true
   radon:
