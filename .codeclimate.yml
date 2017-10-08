@@ -8,7 +8,7 @@ engines:
         python:
   # ... CONFIG CONTENT ...
   eslint:
-    enabled: true
+    enabled: false
     # ... CONFIG CONTENT ...
     checks:
       max-statements:
