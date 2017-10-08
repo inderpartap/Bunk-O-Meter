@@ -40,7 +40,7 @@ def attendance(username,password):
 	test = mydriver.get(baseurl)
 	#mydriver.maximize_window() this stopped working, dont know why. will check this later
 	
-	
+
 	mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
 
 
@@ -84,7 +84,7 @@ def attendance(username,password):
 	text_file = codecs.open(filename, "w", 'utf-8')
 	text_file.write(html_source)
 	text_file.close()
-	result =[[] for i in xrange(8)]
+	result =[[] for i in range(8)]
 	result = parse.parseatt(filename)
 	mydriver.quit()
 #	display.stop()
