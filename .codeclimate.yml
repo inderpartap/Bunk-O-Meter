@@ -9,15 +9,11 @@ engines:
   # ... CONFIG CONTENT ...
   eslint:
     enabled: false
-    # ... CONFIG CONTENT ...
-    checks:
-      max-statements:
-        enabled: false
-      complexity:
-        enabled: false
-
   fixme:
     enabled: true
+    checks:
+      TODO:
+        enabled: false
   radon:
     enabled: true
     
