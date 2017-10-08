@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 
 #sudo apt-get install xvfb and pip install pyvirtualdisplay to run it in background
-from pyvirtualdisplay import Display
+#from pyvirtualdisplay import Display
 from selenium import webdriver
 
 from selenium.webdriver.common.by import By
@@ -20,8 +20,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
 def attendance(username,password):
-	display = Display(visible=0, size=(800, 600))
-	display.start()
+#	display = Display(visible=0, size=(800, 600))
+#	display.start()
 
 	baseurl = "http://academicscc.vit.ac.in/student/stud_login.asp"
 	regno = username
@@ -34,30 +34,14 @@ def attendance(username,password):
 		   'submitButton' :   "html/body/table[3]/tbody/tr/td/form/table/tbody/tr/td/table/tbody/tr[6]/td/input[1]"
 	         }
 
-	mydriver = webdriver.Firefox()
+#	mydriver = webdriver.Firefox()
+	mydriver = webdriver.PhantomJS()
+	mydriver.set_window_size(1120, 550)
 	test = mydriver.get(baseurl)
 	#mydriver.maximize_window() this stopped working, dont know why. will check this later
 	
+	
 	mydriver.execute_script('document.getElementById("imgCaptcha").oncontextmenu = "return true"')
-
-
-	# now that we have the preliminary stuff out of the way time to get that image :D
-	#element = mydriver.find_element_by_xpath(".//*[@id='imgCaptcha']") # finding part of the captcha
-	#location = element.location
-	#size = element.size
-	#mydriver.save_screenshot('screenshot.jpg') # save screenshot of entire page
-
-
-	#im = Image.open('screenshot.jpg') # uses PIL library to open image in memory
-
-	#left = location['x']
-	#top = location['y']
-	#right = location['x'] + size['width']
-	#bottom = location['y'] + size['height']
-
-
-	#im = im.crop((left, top, right, bottom)) # define crop points
-	#im.save('screenshot.jpg') # save new cropped image
 
 
 	#Clear Username TextBox if already allowed "Remember Me" 
@@ -103,7 +87,7 @@ def attendance(username,password):
 	result =[[] for i in xrange(8)]
 	result = parse.parseatt(filename)
 	mydriver.quit()
-	display.stop()
+#	display.stop()
 
 	json_filename = regno + ".json"
 	with open(json_filename, "w") as outfile:
