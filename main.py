@@ -73,9 +73,27 @@ def attendance(username,password):
 
 	time.sleep(3)
 
+	#adding info like date and current semester to the URL's
 	fromdate = "01-Jan-2017"
 	todate = datetime.date.today().strftime ("%d-%b-%Y")
-	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem=FS&fmdt="+fromdate+"&todt="+todate
+	month = datetime.datetime.now().strftime("%m")
+	sem="FS"
+	if 1<=month and month<=6 or month==12:
+		sem="WS"
+	elif month>=7 and month <=11:
+		sem="FS"
+
+	#URL for student profile - html/body/table/tbody/tr/td[2]/table[3]/tbody/tr[2]/td[2]
+	profileurl = "https://academicscc.vit.ac.in/student/profile_personal_view.asp"
+	#URL for timetable
+	timetableurl = "https://academicscc.vit.ac.in/student/course_regular.asp?sem="+sem
+	#URL for CAT marks (whenever available)
+	marksurl = "https://academicscc.vit.ac.in/student/marks.asp?sem="+sem
+	#URL for Academic History
+	historyurl = "https://academicscc.vit.ac.in/student/student_history.asp"
+	#URL for attendance
+	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem="+sem+"&fmdt="+fromdate+"&todt="+todate
+	
 	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
 	mydriver.get(attendanceurl)
 	html_source = mydriver.page_source
@@ -87,9 +105,5 @@ def attendance(username,password):
 	result =[[] for i in range(8)]
 	result = parse.parseatt(filename)
 	mydriver.quit()
-#	display.stop()
 
-	json_filename = regno + ".json"
-	with open(json_filename, "w") as outfile:
-	    json.dump({'Course_Code':result[0], 'Course_Name':result[1], 'Course_Type':result[2], 'Attendace':result[3].tolist(),'Attendance_Going':result[4].tolist(),'Attendance_Miss':result[5].tolist(),'No_Miss':result[6].tolist(),'No_Bar':result[7].tolist()}, outfile, indent=4)
 	return result
