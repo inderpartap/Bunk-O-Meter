@@ -5,7 +5,8 @@ $('#password').focusout(function(){
   $('form').removeClass('up')
 });
 
-// Panda Eye move
+
+// Panda Eye movement
 $(document).on( "mousemove", function( event ) {
   var dw = $(document).width() / 15;
   var dh = $(document).height() / 15;
@@ -17,6 +18,7 @@ $(document).on( "mousemove", function( event ) {
   });
 });
 
+// 5.1 and 5.42 are roughly the central values
 // validation
 
 

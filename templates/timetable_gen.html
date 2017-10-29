@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Dashboard - {{regno}}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Animation library for notifications   -->
+    <link href="{{ url_for('static',filename='assets/css/animate.min.css') }}" rel="stylesheet">
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="{{ url_for('static',filename='assets/css/light-bootstrap-dashboard.css') }}" rel="stylesheet">
+    <!--  Timetable generation CSS    -->
+    <link href="{{ url_for('static',filename='timetable/css/style.css') }}" rel="stylesheet">
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="{{ url_for('static',filename='assets/css/pe-icon-7-stroke.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{{ url_for('static',filename='assets/img/sidebar-5.jpg') }}">
+            <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                    {{regno}}
+                </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="dashboard">
+                        <i class="pe-7s-graph"></i>
+                        <p>Attendance</p>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="timetable">
+                        <i class="pe-7s-user"></i>
+                        <p>Time Table</p>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="marks">
+                        <i class="pe-7s-user"></i>
+                        <p>Marks</p>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="history">
+                        <i class="pe-7s-user"></i>
+                        <p>Academic History</p>
+                    </a>
+                    </li>
+                    <li class="active">
+                        <a href="plan">
+                        <i class="pe-7s-user"></i>
+                        <p>Plan Timetable</p>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Attendance Menu</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/">
+                                    <p>Log out</p>
+                                </a>
+                            </li>
+                            <li class="separator hidden-lg hidden-md"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div id="option_buttons" class="horizontal-scroll-no-collapse text-center">
+                        <!-- Screenshot button -->
+                        <button type="button" id="takeScreenshotBtn" class="btn btn-success">Timetable Screenshot</button>
+                        <!-- Quick visualization button -->
+                        <button type="button" id="toggleClickToSelect" data-toggle="button" class="btn btn-warning" data-state="disabled">Enable Quick Visualization</button>
+                        <!-- Reset button -->
+                        <button type="button" id="resetButton" class="btn btn-danger">Reset</button>
+                    </div>
+                </div>
+                <div class="container">
+                    <!-- Slot selection area -->
+                    <div id="slot-sel-area" class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <h4>Add Courses To Timetable</h4>
+                            </div>
+                            <div class="panel-body">
+                                <form class="col-xs-12">
+                                    <div class="row">
+                                        <div class="form-group col-xs-12 col-sm-6">
+                                            <label for="inputCourseCode" class="control-label">Course code:</label>
+                                            <div>
+                                                <input type="text" class="form-control" id="inputCourseCode" placeholder="eg: CSE1001">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-6">
+                                            <label for="inputCourseTitle" class="control-label">Course title:</label>
+                                            <div>
+                                                <input type="text" class="form-control" id="inputCourseTitle" placeholder="eg: PROBLEM SOLVING AND PROGRAMMING">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12">
+                                            <blockquote class="myBlockquote">Search, select then add or double click to quickly add.</blockquote>
+                                            <!-- Inserted select course buttons here -->
+                                            <div id="insertCourseSelectionOptions" class="list-group horizontal-scroll-no-collapse">
+                                    
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 text-center">
+                                            <button id="slot-sel-area-toggle-fields-btn" type="button" class="btn btn-link">Toggle Other Fields</button>
+                                        </div>
+                                        <div id="slot-sel-area-toggle-fields" style="display:none;">
+                                            <div class="form-group col-xs-12 col-sm-6">
+                                                <label for="inputSlotString" class="control-label">Slot:</label>
+                                                <div>
+                                                    <input type="text" class="form-control" id="inputSlotString" placeholder="eg: L1+L2+L3">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-sm-6">
+                                                <label for="inputFaculty" class="control-label">Faculty:</label>
+                                                <div>
+                                                    <input type="text" placeholder="eg: John Doe" class="form-control" id="inputFaculty">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-sm-6">
+                                                <label for="inputVenue" class="control-label">Venue:</label>
+                                                <div>
+                                                    <input type="text" placeholder="eg: SJTG01" class="form-control" id="inputVenue">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-sm-6">
+                                                <label for="inputCourseCredits" class="control-label">Credits:</label>
+                                                <div>
+                                                    <input type="number" class="form-control" placeholder="eg: 4" id="inputCourseCredits">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- To prevent clashes when J component is added. -->
+                                        <input type="hidden" id="inputIsProject" value="false">
+                                        <div class="form-group col-xs-12">
+                                            <div class="text-right">
+                                                <button type="button" id="clearCourseBtn" class="btn btn-default">Clear</button>
+                                                <button type="button" id="addCourseBtn" class="btn btn-success">Add Course</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- End of panel-body -->
+                        </div>
+                        <!-- End of panel -->
+                    </div>
+                </div>
+                <!-- End of container-->
+                <hr>
+                <div class="container-fluid">
+                    <!-- multiple table option -->
+                    <div class="row text-center">
+                        <div class="col-xs-12">
+                            <!-- add timetables button -->
+                            <div class="btn-group" role="group">
+                                <div class="btn-group saved-tt-picker-btn-group">
+                                    <!-- Current table -->
+                                    <button id="saved-tt-picker-label" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="btn-text">Table Default</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <!-- Tables list -->
+                                    <ul id="saved-tt-picker" class="dropdown-menu">
+                                        <li>
+                                            <a href="JavaScript:void(0);" data-table-id="0">
+                  <span class="tt-table-name">Table Default</span>
+                </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button id="saved-tt-picker-add" type="button" class="btn btn-primary">&#10010;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Fluid container -->
+                <!-- <hr> -->
+                <div class="container">
+                    <!-- Quick selection tiles - morning slots -->
+                    <div class="quick-selection noselect" style="display:none">
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="A1-tile btn">A1</button>
+                            <button class="B1-tile btn">B1</button>
+                            <button class="C1-tile btn">C1</button>
+                            <button class="D1-tile btn">D1</button>
+                            <button class="E1-tile btn">E1</button>
+                            <button class="F1-tile btn">F1</button>
+                            <button class="G1-tile btn">G1</button>
+                        </div>
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="TA1-tile btn">TA1</button>
+                            <button class="TB1-tile btn">TB1</button>
+                            <button class="TC1-tile btn">TC1</button>
+                            <button class="TD1-tile btn">TD1</button>
+                            <button class="TE1-tile btn">TE1</button>
+                            <button class="TF1-tile btn">TF1</button>
+                            <button class="TG1-tile btn">TG1</button>
+                        </div>
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="TAA1-tile btn">TAA1</button>
+                            <button class="TBB1-tile btn" disabled>TBB1</button>
+                            <button class="TCC1-tile btn">TCC1</button>
+                            <button class="TDD1-tile btn" disabled>TDD1</button>
+                            <button class="TEE1-tile btn" disabled>TEE1</button>
+                            <button class="TFF1-tile btn" disabled>TFF1</button>
+                            <button class="TGG1-tile btn" disabled>TGG1</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of container -->
+                <!-- Timetable -->
+                <div class="container-fluid text-center noselect">
+                    <div id="timetable" class="row table-responsive">
+                        <table class="table table-bordered">
+                            <tr style="display:none" class="screenshot_msg">
+                                <td colspan="16">FFCS Scheduler | ffcsscheduler.herokuapp.com</td>
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">THEORY
+                                    <br>HOURS</td>
+                                <td class="TheoryHours">08:00 AM
+                                    <br>to
+                                    <br>08:50 AM</td>
+                                <td class="TheoryHours">09:00 AM
+                                    <br>to
+                                    <br>09:50 AM</td>
+                                <td class="TheoryHours">10:00 AM
+                                    <br>to
+                                    <br>10:50 AM</td>
+                                <td class="TheoryHours">11:00 AM
+                                    <br>to
+                                    <br>11:50 AM</td>
+                                <td class="TheoryHours">12:00 PM
+                                    <br>to
+                                    <br>12:50 PM</td>
+                                <td class="TheoryHours"></td>
+                                <td width="8px" rowspan="9" class="ColumnOneDays">
+                                    <strong>L
+              <br>U
+              <br>N
+              <br>C
+              <br>H</strong>
+                                </td>
+                                <td class="TheoryHours">02:00 PM
+                                    <br>to
+                                    <br>02:50 PM</td>
+                                <td class="TheoryHours">03:00 PM
+                                    <br>to
+                                    <br>03:50 PM</td>
+                                <td class="TheoryHours">04:00 PM
+                                    <br>to
+                                    <br>04:50 PM</td>
+                                <td class="TheoryHours">05:00 PM
+                                    <br>to
+                                    <br>05:50 PM</td>
+                                <td class="TheoryHours">06:00 PM
+                                    <br>to
+                                    <br>06:50 PM</td>
+                                <td class="TheoryHours">07:00 PM
+                                    <br>to
+                                    <br>07:50 PM</td>
+                                <!--<td class="TheoryHours">07:00 PM<br>to<br>07:50 PM</td>
+          <td class="TheoryHours">08:00 PM<br>to<br>08:50 PM</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">LAB
+                                    <br>HOURS</td>
+                                <td class="LabHours">08:00 AM
+                                    <br>to
+                                    <br>08:45 AM</td>
+                                <td class="LabHours">08:46 AM
+                                    <br>to
+                                    <br>09:30 AM</td>
+                                <td class="LabHours">10:00 AM
+                                    <br>to
+                                    <br>10:45 AM</td>
+                                <td class="LabHours">10:46 AM
+                                    <br>to
+                                    <br>11:30 AM</td>
+                                <td class="LabHours">11:31 AM
+                                    <br>to
+                                    <br>12:15 AM</td>
+                                <td class="LabHours">12:16 AM
+                                    <br>to
+                                    <br>01:00 PM</td>
+                                <td class="LabHours">02:00 PM
+                                    <br>to
+                                    <br>02:45 PM</td>
+                                <td class="LabHours">02:46 PM
+                                    <br>to
+                                    <br>03:30 PM</td>
+                                <td class="LabHours">04:00 PM
+                                    <br>to
+                                    <br>04:45 PM</td>
+                                <td class="LabHours">04:46 PM
+                                    <br>to
+                                    <br>05:30 PM</td>
+                                <td class="LabHours">05:31 PM
+                                    <br>to
+                                    <br>06:15 PM</td>
+                                <td class="LabHours">06:16 PM
+                                    <br>to
+                                    <br>07:00 PM</td>
+                                <!--<td class="LabHours">07:30 PM<br>to<br>08:20 PM</td>
+          <td class="LabHours">08:20 PM<br>to<br>09:10 PM</td>-->
+                            </tr>
+                            <tr>
+                                <!-- IMPORTANT: It's important to maintain the order of class. i.e. A1,F1,D1,.. are 2nd -->
+                                <td class="ColumnOneDays">MON</td>
+                                <td class="TimetableContent A1 L1">A1 / L1</td>
+                                <td class="TimetableContent F1 L2">F1 / L2</td>
+                                <td class="TimetableContent D1 L3">D1 / L3</td>
+                                <td class="TimetableContent TB1 L4">TB1 / L4</td>
+                                <td class="TimetableContent TG1 L5">TG1 / L5</td>
+                                <td class="TimetableContent L6">L6</td>
+                                <td class="TimetableContent A2 L31">A2 / L31</td>
+                                <td class="TimetableContent F2 L32">F2 / L32</td>
+                                <td class="TimetableContent D2 L33">D2 / L33</td>
+                                <td class="TimetableContent TB2 L34">TB2 / L34</td>
+                                <td class="TimetableContent TG2 L35">TG2 / L35</td>
+                                <td class="TimetableContent V3 L36">V3 / L36</td>
+                                <!--<td class="TimetableContent H1 L61">H1 / L61</td>
+          <td class="TimetableContent K1 L62">K1 / L62</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">TUE</td>
+                                <td class="TimetableContent B1 L7">B1 / L7</td>
+                                <td class="TimetableContent G1 L8">G1 / L8</td>
+                                <td class="TimetableContent E1 L9">E1 / L9</td>
+                                <td class="TimetableContent TC1 L10">TC1 / L10</td>
+                                <td class="TimetableContent TAA1 L11">TAA1 / L11</td>
+                                <td class="TimetableContent L12">L12</td>
+                                <td class="TimetableContent B2 L37">B2 / L37</td>
+                                <td class="TimetableContent G2 L38">G2 / L38</td>
+                                <td class="TimetableContent E2 L39">E2 / L39</td>
+                                <td class="TimetableContent TC2 L40">TC2 / L40</td>
+                                <td class="TimetableContent TAA2 L41">TAA2 / L41</td>
+                                <td class="TimetableContent V4 L42">V4 / L42</td>
+                                <!--<td class="TimetableContent H2 L63">H2 / L63</td>
+          <td class="TimetableContent K2 L64">K2 / L64</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">WED</td>
+                                <td class="TimetableContent C1 L13">C1 / L13</td>
+                                <td class="TimetableContent A1 L14">A1 / L14</td>
+                                <td class="TimetableContent F1 L15">F1 / L15</td>
+                                <td class="TimetableContent V1 L16">V1 / L16</td>
+                                <td class="TimetableContent V2">V2</td>
+                                <td class="TimetableContent"></td>
+                                <td class="TimetableContent C2 L43">C2 / L43</td>
+                                <td class="TimetableContent A2 L44">A2 / L44</td>
+                                <td class="TimetableContent F2 L45">F2 / L45</td>
+                                <td class="TimetableContent TD2 L46">TD2 / L46</td>
+                                <td class="TimetableContent TBB2 L47">TBB2 / L47</td>
+                                <td class="TimetableContent V5 L48">V5 / L48</td>
+                                <!--<td class="TimetableContent H3 L65">H3 / L65</td>
+          <td class="TimetableContent K3 L66">K3 / L66</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">THU</td>
+                                <td class="TimetableContent D1 L19">D1 / L19</td>
+                                <td class="TimetableContent B1 L20">B1 / L20</td>
+                                <td class="TimetableContent G1 L21">G1 / L21</td>
+                                <td class="TimetableContent TE1 L22">TE1 / L22</td>
+                                <td class="TimetableContent TCC1 L23">TCC1 / L23</td>
+                                <td class="TimetableContent L24">L24</td>
+                                <td class="TimetableContent D2 L49">D2 / L49</td>
+                                <td class="TimetableContent B2 L50">B2 / L50</td>
+                                <td class="TimetableContent G2 L51">G2 / L51</td>
+                                <td class="TimetableContent TE2 L52">TE2 / L52</td>
+                                <td class="TimetableContent TCC2 L53">TCC2 / L53</td>
+                                <td class="TimetableContent V6 L54">V6 / L54</td>
+                                <!--<td class="TimetableContent H4 L67">H4 / L67</td>
+          <td class="TimetableContent K4 L68">K4 / L68</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">FRI</td>
+                                <td class="TimetableContent E1 L25">E1 / L25</td>
+                                <td class="TimetableContent C1 L26">C1 / L26</td>
+                                <td class="TimetableContent TA1 L27">TA1 / L27</td>
+                                <td class="TimetableContent TF1 L28">TF1 / L28</td>
+                                <td class="TimetableContent TD1 L29">TD1 / L29</td>
+                                <td class="TimetableContent L30">L30</td>
+                                <td class="TimetableContent E2 L55">E2 / L55</td>
+                                <td class="TimetableContent C2 L56">C2 / L56</td>
+                                <td class="TimetableContent TA2 L57">TA2 / L57</td>
+                                <td class="TimetableContent TF2 L58">TF2 / L58</td>
+                                <td class="TimetableContent TDD2 L59">TDD2 / L59</td>
+                                <td class="TimetableContent V7 L60">V7 / L60</td>
+                                <!--<td class="TimetableContent H5 L69">H5 / L69</td>
+          <td class="TimetableContent K5 L70">K5 / L70</td>-->
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">SAT</td>
+                                <td class="TimetableContent V8 L71">V8 / L71</td>
+                                <td class="TimetableContent X1 L72">X1 / L72</td>
+                                <td class="TimetableContent X1 L73">X1 / L73</td>
+                                <td class="TimetableContent Y1 L74">Y1 / L74</td>
+                                <td class="TimetableContent Y1 L75">Y1 / L75</td>
+                                <td class="TimetableContent L76">L76</td>
+                                <td class="TimetableContent X2 L77">X2 / L77</td>
+                                <td class="TimetableContent Z L78">Z / L78</td>
+                                <td class="TimetableContent Y2 L79">Y2 / L79</td>
+                                <td class="TimetableContent W2 L80">W2 / L80</td>
+                                <td class="TimetableContent W2 L81">W2 / L81</td>
+                                <td class="TimetableContent V9 L82">V9 / L82</td>
+                            </tr>
+                            <tr>
+                                <td class="ColumnOneDays">SUN</td>
+                                <td class="TimetableContent V10 L83">V10 / L83</td>
+                                <td class="TimetableContent Y1 L84">Y1 / L84</td>
+                                <td class="TimetableContent Y1 L85">Y1 / L85</td>
+                                <td class="TimetableContent X1 L86">X1 / L86</td>
+                                <td class="TimetableContent X1 L87">X1 / L87</td>
+                                <td class="TimetableContent L88">L88</td>
+                                <td class="TimetableContent Y2 L89">Y2 / L89</td>
+                                <td class="TimetableContent Z L90">Z / L90</td>
+                                <td class="TimetableContent X2 L91">X2 / L91</td>
+                                <td class="TimetableContent W2 L92">W2 / L92</td>
+                                <td class="TimetableContent W2 L93">W2 / L93</td>
+                                <td class="TimetableContent V11 L94">V11 / L94</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- End of container-fluid -->
+                <div class="container">
+                    <!-- Quick selection tiles - evening slots -->
+                    <div class="quick-selection noselect" style="display:none">
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="A2-tile btn">A2</button>
+                            <button class="B2-tile btn">B2</button>
+                            <button class="C2-tile btn">C2</button>
+                            <button class="D2-tile btn">D2</button>
+                            <button class="E2-tile btn">E2</button>
+                            <button class="F2-tile btn">F2</button>
+                            <button class="G2-tile btn">G2</button>
+                        </div>
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="TA2-tile btn">TA2</button>
+                            <button class="TB2-tile btn">TB2</button>
+                            <button class="TC2-tile btn">TC2</button>
+                            <button class="TD2-tile btn">TD2</button>
+                            <button class="TE2-tile btn">TE2</button>
+                            <button class="TF2-tile btn">TF2</button>
+                            <button class="TG2-tile btn">TG2</button>
+                        </div>
+                        <div class="horizontal-scroll-no-collapse">
+                            <button class="TAA2-tile btn">TAA2</button>
+                            <button class="TBB2-tile btn">TBB2</button>
+                            <button class="TCC2-tile btn">TCC2</button>
+                            <button class="TDD2-tile btn">TDD2</button>
+                            <button class="TEE2-tile btn" disabled>TEE2</button>
+                            <button class="TFF2-tile btn" disabled>TFF2</button>
+                            <button class="TGG2-tile btn" disabled>TGG2</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of container -->
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <blockquote class="myBlockquote">Double tap the course to load it back into the panel.</blockquote>
+                        </div>
+                    </div>
+                    <!-- Courses added from panel -->
+                    <div id="courseListTable" class="row noselect">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr style="display:none" class="screenshot_msg">
+                                        <td colspan="7">FFCS Scheduler | ffcsscheduler.herokuapp.com</td>
+                                    </tr>
+                                    <tr class="success">
+                                        <th>Slot</th>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Faculty</th>
+                                        <th>Venue</th>
+                                        <th>Credits</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Course Record added here -->
+                                    <tr class="active" id="totalCreditsTr">
+                                        <td colspan="7">
+                                            <strong>Total Credits:
+                  <span id="totalCredits">0</span>
+                </strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                Home
+                            </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                Github
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                        document.write(new Date().getFullYear())
+                        </script> <a href="http://www.github.com/inderpartap">FFCS Scheduler</a>, made with love by Inderpartap Cheema, Raghav Kakkar, Sudhanva Devanathan
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="{{ url_for('static',filename='assets/js/jquery-1.10.2.js') }}"></script>
+<script src="{{ url_for('static',filename='assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='assets/js/bootstrap-notify.js') }}"></script>
+<script src="{{ url_for('static',filename='assets/js/light-bootstrap-dashboard.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.2/localforage.min.js"></script>
+<!-- js -->
+<script src="{{ url_for('static',filename='timetable/js/colorchange.js') }}"></script>
+<script src="{{ url_for('static',filename='timetable/js/script.js') }}"></script>
+<script type="text/javascript">
+type = ['', 'info', 'success', 'warning', 'danger'];
+
+
+demo = {
+    initPickColor: function() {
+        $('.pick-class-label').click(function() {
+            var new_class = $(this).attr('new-class');
+            var old_class = $('#display-buttons').attr('data-class');
+            var display_div = $('#display-buttons');
+            if (display_div.length) {
+                var display_buttons = display_div.find('.btn');
+                display_buttons.removeClass(old_class);
+                display_buttons.addClass(new_class);
+                display_div.attr('data-class', new_class);
+            }
+        });
+    }
+
+}
+</script>
+
+</html>

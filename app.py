@@ -71,5 +71,10 @@ def history():
 	# finals_credits=finals_credits.T
 	return render_template('history.html', regno=regno, history=finals_hist, credits=credits)
 
+@app.route("/plan")
+def plan():
+	regno=session['username']
+	return render_template('timetable_gen.html', regno=regno)
+
 if __name__ == "__main__":
 	app.run()

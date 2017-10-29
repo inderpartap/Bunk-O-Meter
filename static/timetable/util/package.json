@@ -1,0 +1,13 @@
+{
+  "name": "ffcs-on-the-go-util",
+  "version": "1.0.0",
+  "description": "Script to help build required JSON from Excel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vatsal Joshi",
+  "dependencies": {
+    "xls-to-json": "^0.4.0"
+  }
+}

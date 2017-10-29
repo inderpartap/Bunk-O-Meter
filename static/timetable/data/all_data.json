@@ -1,0 +1,46 @@
+[
+{
+    "VENUE": "AB1-611",
+    "CODE": "CSE309",
+    "TITLE": "Programming Language Translators",
+    "TYPE": "TH",
+    "CREDITS": "4",
+    "SLOT": "C1+TC1+TCC1",
+    "FACULTY": "SUGANYA G"
+},
+{
+    "VENUE": "AB1-612",
+    "CODE": "CSE328",
+    "TITLE": "Software Project Management",
+    "TYPE": "TH",
+    "CREDITS": "3",
+    "SLOT": "D1+TD1",
+    "FACULTY": "Aparna V"
+},
+{
+    "VENUE": "AB1-611",
+    "CODE": "CSE403",
+    "TITLE": "Human Computer Interaction",
+    "TYPE": "TH",
+    "CREDITS": "3",
+    "SLOT": "F1+TF1",
+    "FACULTY": "Prassanna J"
+},
+{
+    "VENUE": "AB1-611",
+    "CODE": "CSE419",
+    "TITLE": "Mobile Computing",
+    "TYPE": "TH",
+    "CREDITS": "3",
+    "SLOT": "A1+TA1",
+    "FACULTY": "Priyadarshini J"
+},
+{
+    "VENUE": "AB1-612",
+    "CODE": "MGT201",
+    "TITLE": "Principles of Management",
+    "TYPE": "TH",
+    "CREDITS": "3",
+    "SLOT": "B1+TB1",
+    "FACULTY": "ARUNA R"
+}]
