@@ -43,7 +43,7 @@
                 </a>
                 </div>
                 <ul class="nav">
-                    <li class="active">
+                    <li>
                         <a href="dashboard">
                         <i class="pe-7s-graph"></i>
                         <p>Attendance</p>
@@ -61,7 +61,7 @@
                         <p>Marks</p>
                     </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="history">
                         <i class="pe-7s-user"></i>
                         <p>Academic History</p>
@@ -97,70 +97,54 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Attendance Statistics</h4>
-                                    <p class="category">Current Performance</p>
-                                </div>
-                                <div class="content">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Barred Subjects
-                                            <i class="fa fa-circle text-warning"></i> Debarred Subjects
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-clock-o"></i> Campaign sent today
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card ">
-                                <div class="header">
-                                    <h4 class="title">Subject Wise Attendance</h4>
-                                    <p class="category">Current Status</p>
-                                </div>
-                                <div class="content">
-                                    <div id="chartActivity" class="ct-chart"></div>
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Current Attendance
-                                            <i class="fa fa-circle text-danger"></i> Missed Class Projection
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-check"></i> Data information verified
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Subject Wise Attendance</h4>
-                                <p class="category">Classes you can miss/ need to go</p>
+                                <h4 class="title">Your Academic History</h4>
+                                <p class="category">Random Text</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
+                                        <th>Sl.No.</th>
                                         <th>Course Code</th>
                                         <th>Course Name</th>
                                         <th>Course Type</th>
-                                        <th>Current(%)</th>
-                                        <th>Attend(%)</th>
-                                        <th>Miss(%)</th>
-                                        <th>Can Miss</th>
-                                        <th>Need to Attend</th>
+                                        <th>Credit</th>
+                                        <th>Grade</th>
+                                        <th>Exam Date</th>
                                     </thead>
                                     <tbody>
-                                    {% for j in resultsT %}
+                                    {% for j in history %}
+                                        <tr>
+                                        {% for i in j %}
+                                            <td>{{i}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Credit Details</h4>
+                                <p class="category">Random Text</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Credits Registered</th>
+                                        <th>Credits Earned</th>
+                                        <th>CGPA</th>
+                                        <th>Branch Rank</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for j in credits %}
                                         <tr>
                                         {% for i in j %}
                                             <td>{{i}}</td>
@@ -260,40 +244,6 @@ demo = {
             }
         });
     },
-    
-    initChartist: function(){    
-         
-    
-        var data = {
-          labels: [{% for i in range(length-1) %}'{{results[0][i]}}',{% endfor %}'{{results[0][length-1]}}'],
-          series: [
-            [{% for i in range(length-1) %}{{results[3][i]}},{% endfor %}{{results[3][length-1]}}],
-            [{% for i in range(length-1) %}{{results[5][i]}},{% endfor %}{{results[5][length-1]}}]
-          ]
-        };
-        
-        var options = {
-            seriesBarDistance: 10,
-            axisX: {
-                showGrid: false
-            },
-            height: "245px"
-        };
-        
-        var responsiveOptions = [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0];
-              }
-            }
-          }]
-        ];
-        
-        Chartist.Bar('#chartActivity', data, options, responsiveOptions); 
-    },
-    
 
     
     showNotification: function(from, align){

@@ -106,5 +106,81 @@ def parseatt(user):
 
 	return result
 
+
+def parsetimetable():
+	return 0
+def parsemarks():
+	return 0
+def parsehistory(user):
+	page = open(user)
+	soup =  BeautifulSoup(page, "html.parser")
+	page.close()
+	c=0
+	for row in soup('table')[2].findAll('tr'):
+	    tds = row('td')
+	    c = c+1
+
+	result =[[] for i in range(7)]
+
+	#Sl. No.
+	i=1
+	slno=[]
+	for i in range(1,c):
+		slno.append(soup('table')[2].findAll('tr')[i].findAll('td')[0].string)
+	result[0] = slno
+
+	#Course Code
+	i=1
+	ccode=[]
+	for i in range(1,c):
+		ccode.append(soup('table')[2].findAll('tr')[i].findAll('td')[1].string)
+	result[1] = ccode
+
+	#Course Name
+	i=1
+	cname=[]
+	for i in range(1,c):
+		cname.append(soup('table')[2].findAll('tr')[i].findAll('td')[2].string)
+	result[2] = cname
+
+	#Course Type
+	i=1
+	ctype=[]
+	for i in range(1,c):
+		ctype.append(soup('table')[2].findAll('tr')[i].findAll('td')[3].string)
+	result[3] = ctype
+
+	#Credits
+	i=1
+	credit=[]
+	for i in range(1,c):
+		credit.append(soup('table')[2].findAll('tr')[i].findAll('td')[4].string)
+	result[4] = credit
+
+	#Grade
+	i=1
+	grade=[]
+	for i in range(1,c):
+		grade.append(soup('table')[2].findAll('tr')[i].findAll('td')[5].string)
+	result[5] = grade
+
+	#Course Exam date
+	i=1
+	exdate=[]
+	for i in range(1,c):
+		exdate.append(soup('table')[2].findAll('tr')[i].findAll('td')[6].string)
+	result[6] = exdate
+
+
+	#credit detials
+	c=4
+	credits =[[] for i in range(1)]
+	i=1
+	creditregis=[]
+	for i in range(0,c):
+		creditregis.append(soup('table')[3].findAll('tr')[1].findAll('td')[i].string)
+	credits[0] = creditregis
+
+	return result,credits
 if __name__ == '__main__':
     parseatt()

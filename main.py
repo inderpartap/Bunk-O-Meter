@@ -94,11 +94,43 @@ def attendance(username,password):
 	#URL for attendance
 	attendanceurl = "https://academicscc.vit.ac.in/student/attn_report.asp?sem="+sem+"&fmdt="+fromdate+"&todt="+todate
 	
+	
+	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
+	mydriver.get(historyurl)
+	html_source = mydriver.page_source
+	filename=regno+"_history.html"
+	text_file = codecs.open(filename, "w", 'utf-8')
+	text_file.write(html_source)
+	text_file.close()
+
+	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
+	mydriver.get(marksurl)
+	html_source = mydriver.page_source
+	filename=regno+"_marks.html"
+	text_file = codecs.open(filename, "w", 'utf-8')
+	text_file.write(html_source)
+	text_file.close()
+
+	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
+	mydriver.get(timetableurl)
+	html_source = mydriver.page_source
+	filename=regno+"_timetable.html"
+	text_file = codecs.open(filename, "w", 'utf-8')
+	text_file.write(html_source)
+	text_file.close()
+
+	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
+	mydriver.get(profileurl)
+	html_source = mydriver.page_source
+	filename=regno+"_profile.html"
+	text_file = codecs.open(filename, "w", 'utf-8')
+	text_file.write(html_source)
+	text_file.close()	
+
 	mydriver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't') 
 	mydriver.get(attendanceurl)
 	html_source = mydriver.page_source
-
-	filename=regno+".html"
+	filename=regno+"_attendance.html"
 	text_file = codecs.open(filename, "w", 'utf-8')
 	text_file.write(html_source)
 	text_file.close()
