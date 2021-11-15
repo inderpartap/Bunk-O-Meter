@@ -36,4 +36,4 @@ WTForms==2.1
 # production server
 gunicorn==19.7.1
 
-pip==9.0.1
+pip==21.1
